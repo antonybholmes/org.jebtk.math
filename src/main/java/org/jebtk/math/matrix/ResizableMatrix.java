@@ -71,7 +71,7 @@ public abstract class ResizableMatrix extends ObjectMatrix {
    * matrix can dynamically resize if necessary.
    *
    * @param row the row
-   * @param column the column
+   * @param col the column
    */
   protected void updateSize(int row, int col) {
     boolean changed = false;

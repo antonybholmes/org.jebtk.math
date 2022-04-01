@@ -290,7 +290,7 @@ public class BooleanMatrix extends IndexRowMatrix {
     int offset = mRowOffsets[index];
 
     for (int i = 0; i < mDim.mCols; ++i) {
-      mData[offset] = f.f(i, 0, getInt(offset)) > 0 ? true : false;
+      mData[offset] = f.f(i, 0, getInt(offset)) > 0;
 
       ++offset;
     }
@@ -303,7 +303,7 @@ public class BooleanMatrix extends IndexRowMatrix {
     int offset = index;
 
     for (int i = 0; i < mDim.mCols; ++i) {
-      mData[offset] = f.f(i, 0, getInt(offset)) > 0 ? true : false;
+      mData[offset] = f.f(i, 0, getInt(offset)) > 0;
 
       offset += mDim.mCols;
     }

@@ -79,9 +79,9 @@ public class IntWorksheet extends Worksheet<Integer> {
   @Override
   protected IterMap<Integer, IterMap<Integer, Integer>> createMap(Integer v) {
     if (v != null) {
-      return DefaultHashMap.create(new DefaultHashMapCreator<Integer, Integer>(v));
+      return DefaultHashMap.create(new DefaultHashMapCreator<>(v));
     } else {
-      return DefaultHashMap.create(new DefaultHashMapCreator<Integer, Integer>(0));
+      return DefaultHashMap.create(new DefaultHashMapCreator<>(0));
     }
   }
 
@@ -140,11 +140,8 @@ public class IntWorksheet extends Worksheet<Integer> {
     // the number of number of times indices must be looked up to
     // set cell elements.
 
-    IterUtils.forEach(m.getRows(), m.getCols(), new ForEach2D() {
-      @Override
-      public void loop(int i, int j) {
-        ret.set(j, i, m.get(i, j));
-      }
+    IterUtils.forEach(m.getRows(), m.getCols(), (int i, int j) -> {
+      ret.set(j, i, m.get(i, j));
     });
 
     return ret;

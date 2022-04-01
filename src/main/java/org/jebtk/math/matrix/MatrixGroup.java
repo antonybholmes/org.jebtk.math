@@ -236,6 +236,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
   /**
    * Sets the regexes.
    *
+   * @param regex
    * @param regexes the new regexes
    * @return
    */
@@ -250,6 +251,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
   /**
    * Sets the regexes.
    *
+   * @param regex
    * @param regexes the new regexes
    * @return
    */
@@ -293,6 +295,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
   /**
    * Adds the regexes.
    *
+   * @param regex
    * @param regexes the regexes
    * @return
    */
@@ -309,6 +312,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
   /**
    * Adds the regexes.
    *
+   * @param regex
    * @param regexes the regexes
    * @return
    */
@@ -353,6 +357,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
    * 
    * @see org.abh.lib.NameProperty#getName()
    */
+  @Override
   public String getName() {
     return mName;
   }
@@ -496,7 +501,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
    */
   public static List<MatrixGroup> loadMgrp1(Path file, DataFrame matrix)
       throws IOException {
-    List<MatrixGroup> groups = new ArrayList<MatrixGroup>();
+    List<MatrixGroup> groups = new ArrayList<>();
 
     String line;
     List<String> tokens;
@@ -564,12 +569,12 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
       return null;
     }
 
-    List<MatrixGroup> groups = new ArrayList<MatrixGroup>();
+    List<MatrixGroup> groups = new ArrayList<>();
 
     String line;
     List<String> tokens;
 
-    Map<String, MatrixGroup> groupMap = new HashMap<String, MatrixGroup>();
+    Map<String, MatrixGroup> groupMap = new HashMap<>();
 
     BufferedReader reader = FileUtils.newBufferedReader(file);
 
@@ -620,7 +625,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
    */
   public static List<MatrixGroup> createRowGroupsByName(Path file,
       DataFrame matrix) throws IOException {
-    List<MatrixGroup> groups = new ArrayList<MatrixGroup>();
+    List<MatrixGroup> groups = new ArrayList<>();
 
     String line;
     List<String> tokens;
@@ -676,9 +681,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
    */
   public static <X extends MatrixGroup> void saveGroups(Path file,
       List<X> groups) throws IOException {
-    BufferedWriter writer = FileUtils.newBufferedWriter(file);
-
-    try {
+    try (BufferedWriter writer = FileUtils.newBufferedWriter(file)) {
       writer.write("name");
       writer.write(TextUtils.TAB_DELIMITER);
       writer.write("color");
@@ -696,8 +699,6 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
         writer.newLine();
       }
 
-    } finally {
-      writer.close();
     }
   }
 
@@ -719,7 +720,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
       X group) {
     int n = m.getRows();
 
-    List<Integer> ret = new ArrayList<Integer>(n);
+    List<Integer> ret = new ArrayList<>(n);
 
     // Use the first set of indices
     String[] v = m.getIndex().getText(0);
@@ -736,7 +737,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
       }
     }
 
-    if (ret.size() > 0) {
+    if (!ret.isEmpty()) {
       Collections.sort(ret);
     }
 
@@ -755,7 +756,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
       List<? extends MatrixGroup> groups) {
     // return findIndices(matrix.getColumnNames(), groups);
 
-    List<List<Integer>> ret = new ArrayList<List<Integer>>();
+    List<List<Integer>> ret = new ArrayList<>();
 
     for (MatrixGroup group : groups) {
       ret.add(findColumnIndices(m, group));
@@ -777,7 +778,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
       X group) {
     int n = m.getCols();
 
-    List<Integer> ret = new ArrayList<Integer>(n);
+    List<Integer> ret = new ArrayList<>(n);
 
     for (int i = 0; i < n; ++i) {
       
@@ -791,7 +792,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
       }
     }
 
-    if (ret.size() > 0) {
+    if (!ret.isEmpty()) {
       Collections.sort(ret);
     }
 
@@ -801,6 +802,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
   /**
    * Return a map of the column indices and the groups they belong to.
    * 
+   * @param <X>
    * @param m
    * @param groups
    * @return
@@ -810,7 +812,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
       List<X> groups) {
     int n = m.getCols();
 
-    IterMap<Integer, List<X>> ret = DefaultTreeMap.create(new ArrayListCreator<X>());
+    IterMap<Integer, List<X>> ret = DefaultTreeMap.create(new ArrayListCreator<>());
 
     String[] names = m.getColumnNames();
     
@@ -845,7 +847,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
    */
   public static List<Integer> findAllColumnIndices(DataFrame m,
       List<? extends MatrixGroup> groups) {
-    List<Integer> ret = new UniqueArrayList<Integer>(m.getCols());
+    List<Integer> ret = new UniqueArrayList<>(m.getCols());
 
     for (MatrixGroup group : groups) {
       ret.addAll(findColumnIndices(m, group));
@@ -866,7 +868,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
    */
   public static List<List<Integer>> findIndices(String[] ids,
       List<? extends MatrixGroup> groups) {
-    List<List<Integer>> ret = new ArrayList<List<Integer>>();
+    List<List<Integer>> ret = new ArrayList<>();
 
     for (MatrixGroup group : groups) {
       ret.add(findIndices(ids, group));
@@ -884,7 +886,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
    */
   public static List<Integer> findAllIndices(String[] ids,
       List<? extends MatrixGroup> groups) {
-    List<Integer> ret = new UniqueArrayList<Integer>();
+    List<Integer> ret = new UniqueArrayList<>();
 
     for (MatrixGroup group : groups) {
       ret.addAll(findIndices(ids, group));
@@ -904,7 +906,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
    */
   public static List<Integer> findIndices(String[] names,
       MatrixGroup group) {
-    Set<Integer> ret = new HashSet<Integer>();
+    Set<Integer> ret = new HashSet<>();
 
     for (Pattern regex : group) {
       //System.err.println("m group " + Arrays.toString(names) + " " + regex);
@@ -926,16 +928,16 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
   public static List<List<Integer>> findGroupIndices(
       List<? extends MatrixGroup> groups,
       List<List<String>> ids) {
-    List<List<Integer>> ret = new ArrayList<List<Integer>>();
+    List<List<Integer>> ret = new ArrayList<>();
 
     for (MatrixGroup group : groups) {
-      List<Integer> newGroup = new ArrayList<Integer>();
+      List<Integer> newGroup = new ArrayList<>();
 
       for (Pattern regex : group) {
         for (int i = 0; i < ids.size(); ++i) {
           List<Integer> indices = TextUtils.find(ids.get(i), regex);
 
-          if (indices.size() == 0) {
+          if (indices.isEmpty()) {
             continue;
           }
 
@@ -979,18 +981,18 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
    */
   public static List<MatrixGroup> orderGroups(
       Map<Integer, List<MatrixGroup>> groups) {
-    if (groups == null || groups.size() == 0) {
+    if (groups == null || groups.isEmpty()) {
       return null;
     }
 
-    Set<MatrixGroup> used = new HashSet<MatrixGroup>();
+    Set<MatrixGroup> used = new HashSet<>();
 
-    List<MatrixGroup> ret = new ArrayList<MatrixGroup>(groups.size());
+    List<MatrixGroup> ret = new ArrayList<>(groups.size());
 
     List<Integer> orderedKeys = CollectionUtils.sort(groups.keySet());
 
     for (int key : orderedKeys) {
-      List<MatrixGroup> temp = new ArrayList<MatrixGroup>();
+      List<MatrixGroup> temp = new ArrayList<>();
 
       for (MatrixGroup group : groups.get(key)) {
         if (used.contains(group)) {
@@ -1023,7 +1025,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
       List<? extends MatrixGroup> groups) {
 
     Map<Integer, List<MatrixGroup>> orderedGroups = DefaultTreeMap
-        .create(new ArrayListCreator<MatrixGroup>());
+        .create(new ArrayListCreator<>());
 
     for (MatrixGroup group : groups) {
       List<Integer> indices = findColumnIndices(m, group);
@@ -1049,7 +1051,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
       DataFrame m,
       List<MatrixGroup> groups,
       Cluster rootCluster) {
-    if (groups == null || groups.size() == 0 || rootCluster == null) {
+    if (groups == null || groups.isEmpty() || rootCluster == null) {
       return null;
     }
 
@@ -1057,13 +1059,13 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
     Map<Integer, List<MatrixGroup>> orderedGroups = MatrixGroup
         .arrangeGroupsByIndex(m, groups);
 
-    List<Integer> newOrder = new ArrayList<Integer>();
+    List<Integer> newOrder = new ArrayList<>();
 
-    Deque<Cluster> stack = new ArrayDeque<Cluster>();
+    Deque<Cluster> stack = new ArrayDeque<>();
 
     stack.push(rootCluster);
 
-    while (stack.size() > 0) {
+    while (!stack.isEmpty()) {
       Cluster cluster = stack.pop();
 
       if (cluster.isParent()) {
@@ -1082,7 +1084,7 @@ Comparable<MatrixGroup>, Iterable<Pattern> {
 
     // reorder the groups
 
-    Map<Integer, List<MatrixGroup>> ret = new HashMap<Integer, List<MatrixGroup>>();
+    Map<Integer, List<MatrixGroup>> ret = new HashMap<>();
 
     for (int i = 0; i < newOrder.size(); ++i) {
       ;

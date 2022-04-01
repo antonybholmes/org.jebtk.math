@@ -44,7 +44,6 @@ public class IdentityMatrix extends RegularMatrix {
    * Create a new empty matrix.
    *
    * @param rows the rows
-   * @param columns the columns
    */
   public IdentityMatrix(int rows) {
     super(rows, rows);

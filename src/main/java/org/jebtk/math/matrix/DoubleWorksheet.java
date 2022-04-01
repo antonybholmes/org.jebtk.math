@@ -78,9 +78,9 @@ public class DoubleWorksheet extends Worksheet<Double> {
   @Override
   protected IterMap<Integer, IterMap<Integer, Double>> createMap(Double v) {
     if (v != null) {
-      return DefaultHashMap.create(new DefaultHashMapCreator<Integer, Double>(v));
+      return DefaultHashMap.create(new DefaultHashMapCreator<>(v));
     } else {
-      return DefaultHashMap.create(new DefaultHashMapCreator<Integer, Double>(0.0));
+      return DefaultHashMap.create(new DefaultHashMapCreator<>(0.0));
     }
   }
 

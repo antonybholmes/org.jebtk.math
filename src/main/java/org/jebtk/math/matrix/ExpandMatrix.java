@@ -66,7 +66,7 @@ public abstract class ExpandMatrix<T> extends ResizableMatrix {
   public ExpandMatrix(int rows, int columns, T v) {
     super(rows, columns);
 
-    mData = DefaultArrayList.create(new DefaultArrayListCreator<T>(v));
+    mData = DefaultArrayList.create(new DefaultArrayListCreator<>(v));
 
     // update size uses the zero based row and column to calculate size
     // so we need to adjust for this

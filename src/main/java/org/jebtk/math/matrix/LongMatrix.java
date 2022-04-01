@@ -732,19 +732,19 @@ public class LongMatrix extends IndexRowMatrix {
       boolean equalVariance) {
     Matrix im = m.getMatrix();
 
-    List<Double> pvalues = new ArrayList<Double>(m.getRows());
+    List<Double> pvalues = new ArrayList<>(m.getRows());
 
     List<Integer> g11 = MatrixGroup.findColumnIndices(m, g1);
     List<Integer> g22 = MatrixGroup.findColumnIndices(m, g2);
 
     for (int i = 0; i < im.getRows(); ++i) {
-      List<Double> p1 = new ArrayList<Double>(g11.size());
+      List<Double> p1 = new ArrayList<>(g11.size());
 
       for (int c : g11) {
         p1.add(m.getValue(i, c));
       }
 
-      List<Double> p2 = new ArrayList<Double>(g22.size());
+      List<Double> p2 = new ArrayList<>(g22.size());
 
       for (int c : g22) {
         p2.add(m.getValue(i, c));
@@ -788,10 +788,10 @@ public class LongMatrix extends IndexRowMatrix {
 
     Matrix im = matrix.getMatrix();
 
-    List<Double> zscores = new ArrayList<Double>(im.getRows());
+    List<Double> zscores = new ArrayList<>(im.getRows());
 
     for (int i = 0; i < im.getRows(); ++i) {
-      List<Double> d1 = new ArrayList<Double>();
+      List<Double> d1 = new ArrayList<>();
 
       for (int c : phenIndices) {
         d1.add(im.getValue(i, c));
@@ -800,7 +800,7 @@ public class LongMatrix extends IndexRowMatrix {
       double mean1 = Statistics.mean(d1);
       double sd1 = Statistics.popStdDev(d1); // sampleStandardDeviation(d1);
 
-      List<Double> d2 = new ArrayList<Double>();
+      List<Double> d2 = new ArrayList<>();
 
       for (int c : controlIndices) {
         d2.add(im.getValue(i, c));
@@ -841,10 +841,10 @@ public class LongMatrix extends IndexRowMatrix {
 
     Matrix im = matrix.getMatrix();
 
-    List<Double> foldChanges = new ArrayList<Double>(im.getRows());
+    List<Double> foldChanges = new ArrayList<>(im.getRows());
 
     for (int i = 0; i < im.getRows(); ++i) {
-      List<Double> d1 = new ArrayList<Double>(g11.size());
+      List<Double> d1 = new ArrayList<>(g11.size());
 
       for (int c : g11) {
         d1.add(im.getValue(i, c));
@@ -852,7 +852,7 @@ public class LongMatrix extends IndexRowMatrix {
 
       double mean1 = Statistics.mean(d1);
 
-      List<Double> d2 = new ArrayList<Double>(g22.size());
+      List<Double> d2 = new ArrayList<>(g22.size());
 
       for (int c : g22) {
         d2.add(im.getValue(i, c));
@@ -884,10 +884,10 @@ public class LongMatrix extends IndexRowMatrix {
 
     Matrix im = matrix.getMatrix();
 
-    List<Double> foldChanges = new ArrayList<Double>(im.getRows());
+    List<Double> foldChanges = new ArrayList<>(im.getRows());
 
     for (int i = 0; i < im.getRows(); ++i) {
-      List<Double> d1 = new ArrayList<Double>();
+      List<Double> d1 = new ArrayList<>();
 
       for (int c : g11) {
         d1.add(im.getValue(i, c));
@@ -895,7 +895,7 @@ public class LongMatrix extends IndexRowMatrix {
 
       double mean1 = Statistics.mean(d1);
 
-      List<Double> d2 = new ArrayList<Double>();
+      List<Double> d2 = new ArrayList<>();
 
       for (int c : g22) {
         d2.add(im.getValue(i, c));

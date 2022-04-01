@@ -62,7 +62,7 @@ public abstract class ObjectMatrix extends Matrix {
     Object v = get(row, column);
 
     if (v != null && v instanceof Number) {
-      return ((Double) v).doubleValue();
+      return ((Double) v);
     } else {
       return 0;
     }

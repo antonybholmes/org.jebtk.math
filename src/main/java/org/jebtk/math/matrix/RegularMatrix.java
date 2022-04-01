@@ -62,6 +62,7 @@ public abstract class RegularMatrix extends Matrix {
     return mDim;
   }
 
+  @Override
   public int size() {
     return mSize;
   }

@@ -35,7 +35,7 @@ import org.jebtk.math.matrix.Matrix;
 /**
  * The class CompleteLinkage.
  */
-public class CompleteLinkage implements Linkage {
+public class CompleteLinkage implements ILinkage {
 
   /*
    * (non-Javadoc)
@@ -60,7 +60,7 @@ public class CompleteLinkage implements Linkage {
 
       d = distanceMatrix.getValue(c1.getId(), c2.getId());
     } else if (!c1.isParent() && c2.isParent()) {
-      Deque<Cluster> stack = new ArrayDeque<Cluster>();
+      Deque<Cluster> stack = new ArrayDeque<>();
 
       stack.push(c2);
 
@@ -79,7 +79,7 @@ public class CompleteLinkage implements Linkage {
         }
       }
     } else if (c1.isParent() && !c2.isParent()) {
-      Deque<Cluster> stack = new ArrayDeque<Cluster>();
+      Deque<Cluster> stack = new ArrayDeque<>();
 
       stack.push(c1);
 
@@ -98,7 +98,7 @@ public class CompleteLinkage implements Linkage {
         }
       }
     } else {
-      Deque<Cluster> stack1 = new ArrayDeque<Cluster>();
+      Deque<Cluster> stack1 = new ArrayDeque<>();
 
       stack1.push(c1);
 
@@ -109,7 +109,7 @@ public class CompleteLinkage implements Linkage {
           stack1.push(cp1.getChild2());
           stack1.push(cp1.getChild1());
         } else {
-          Deque<Cluster> stack2 = new ArrayDeque<Cluster>();
+          Deque<Cluster> stack2 = new ArrayDeque<>();
 
           stack2.push(c2);
 

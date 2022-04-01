@@ -43,7 +43,7 @@ import org.jebtk.math.matrix.Matrix;
 public class HierarchicalClustering {
 
   /** The flips. */
-  private static boolean[] FLIPS = { true, false };
+  private static final boolean[] FLIPS = { true, false };
 
   /**
    * Creates the row distance matrix.
@@ -112,7 +112,7 @@ public class HierarchicalClustering {
    * @return the cluster
    */
   public static Cluster rowCluster(final Matrix m,
-      final Linkage l,
+      final ILinkage l,
       DistanceMetric distanceMetric,
       boolean optimalLeafOrder) {
     DistanceMatrix distance = createRowDistanceMatrix(m, distanceMetric);
@@ -130,7 +130,7 @@ public class HierarchicalClustering {
    * @return the cluster
    */
   public static Cluster columnCluster(final Matrix m,
-      final Linkage l,
+      final ILinkage l,
       final DistanceMetric distanceMetric,
       boolean optimalLeafOrder) {
 
@@ -140,7 +140,7 @@ public class HierarchicalClustering {
   }
   
   public static Cluster columnCluster(final Matrix m,
-      final Linkage l,
+      final ILinkage l,
       boolean optimalLeafOrder,
       final DistanceMatrix mDist) {
 
@@ -158,15 +158,15 @@ public class HierarchicalClustering {
    * 
    * @return the cluster
    */
-  public static Cluster cluster(final Linkage l,
+  public static Cluster cluster(final ILinkage l,
       int numberOfSamples,
       boolean optimalLeafOrdering,
       DistanceMatrix distanceMatrix) {
 
     // Start by putting every index in a cluster
 
-    List<Cluster> allClusters = new ArrayList<Cluster>();
-    List<Cluster> clusters = new ArrayList<Cluster>();
+    List<Cluster> allClusters = new ArrayList<>();
+    List<Cluster> clusters = new ArrayList<>();
 
     // keep track of the clusters created
     int clusterId = 0;
@@ -315,7 +315,7 @@ public class HierarchicalClustering {
    */
   public static void orderClustersOptimally(final DistanceMatrix distanceMatrix,
       Cluster rootCluster) {
-    Deque<Cluster> stack = new ArrayDeque<Cluster>();
+    Deque<Cluster> stack = new ArrayDeque<>();
 
     stack.push(rootCluster);
 
@@ -326,7 +326,7 @@ public class HierarchicalClustering {
 
     // sum total distances
 
-    Map<Integer, Double> cumDistanceMap = new HashMap<Integer, Double>();
+    Map<Integer, Double> cumDistanceMap = new HashMap<>();
 
     for (int i = 0; i < distanceMatrix.getRows(); ++i) {
       double sum = 0;
@@ -338,7 +338,7 @@ public class HierarchicalClustering {
       cumDistanceMap.put(i, sum);
     }
 
-    while (stack.size() > 0) {
+    while (!stack.isEmpty()) {
       Cluster cluster = stack.pop();
 
       if (!cluster.isParent()) {
@@ -421,7 +421,7 @@ public class HierarchicalClustering {
     Deque<Cluster> stack;
     Deque<Cluster> newTreeStack;
     Cluster newRoot;
-    List<Integer> nodes = new ArrayList<Integer>(numberOfSamples);
+    List<Integer> nodes = new ArrayList<>(numberOfSamples);
     int id1;
     int id2;
 
@@ -443,14 +443,14 @@ public class HierarchicalClustering {
 
             // Build the new tree
 
-            stack = new ArrayDeque<Cluster>();
+            stack = new ArrayDeque<>();
             stack.push(rootCluster);
 
             newRoot = new Cluster(rootCluster.getId(), rootCluster.getLevel());
 
             // Build a new tree where we might be swapping nodes
             // around
-            newTreeStack = new ArrayDeque<Cluster>();
+            newTreeStack = new ArrayDeque<>();
             newTreeStack.push(newRoot);
 
             while (!stack.isEmpty()) {
@@ -559,12 +559,12 @@ public class HierarchicalClustering {
    */
   public static void order(final DistanceMatrix distanceMatrix,
       Cluster rootCluster) {
-    Deque<Cluster> stack = new ArrayDeque<Cluster>();
-    List<Cluster> parents = new ArrayList<Cluster>();
+    Deque<Cluster> stack = new ArrayDeque<>();
+    List<Cluster> parents = new ArrayList<>();
 
     stack.push(rootCluster);
 
-    Map<Integer, Double> minDistanceMap = new HashMap<Integer, Double>();
+    Map<Integer, Double> minDistanceMap = new HashMap<>();
     // Map<Integer, double> maxDistanceMap = new HashMap<Integer, double>();
 
     while (!stack.isEmpty()) {
@@ -635,12 +635,12 @@ public class HierarchicalClustering {
    */
   public static void orderById(final DistanceMatrix distanceMatrix,
       Cluster rootCluster) {
-    Deque<Cluster> stack = new ArrayDeque<Cluster>();
-    List<Cluster> parents = new ArrayList<Cluster>();
+    Deque<Cluster> stack = new ArrayDeque<>();
+    List<Cluster> parents = new ArrayList<>();
 
     stack.push(rootCluster);
 
-    Map<Integer, Integer> orderMap = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> orderMap = new HashMap<>();
     // Map<Integer, double> maxDistanceMap = new HashMap<Integer, double>();
 
     while (!stack.isEmpty()) {

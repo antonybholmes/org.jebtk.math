@@ -51,7 +51,7 @@ public class MathUtils {
    */
   public static <T extends Number> List<Double> multiply(List<T> values,
       double x) {
-    List<Double> ret = new ArrayList<Double>(values.size());
+    List<Double> ret = new ArrayList<>(values.size());
 
     for (T v : values) {
       ret.add(v.doubleValue() * x);
@@ -68,7 +68,7 @@ public class MathUtils {
    * @return the list
    */
   public static List<Integer> add(Collection<Integer> values, int i) {
-    List<Integer> ret = new ArrayList<Integer>(values.size());
+    List<Integer> ret = new ArrayList<>(values.size());
 
     for (int v : values) {
       ret.add(v + 1);
@@ -87,7 +87,7 @@ public class MathUtils {
    */
   public static <T extends Number> List<Double> divide(List<T> values,
       double x) {
-    List<Double> ret = new ArrayList<Double>(values.size());
+    List<Double> ret = new ArrayList<>(values.size());
 
     for (T v : values) {
       ret.add(v.doubleValue() / x);
@@ -207,7 +207,7 @@ public class MathUtils {
   public static List<Integer> findInIndexedList(
       Collection<Indexed<Integer, Double>> values,
       Condition condition) {
-    List<Integer> indices = new ArrayList<Integer>();
+    List<Integer> indices = new ArrayList<>();
 
     for (Indexed<Integer, Double> index : values) {
       if (condition.test(index.getValue())) {
@@ -229,7 +229,7 @@ public class MathUtils {
       List<Indexed<Integer, Double>> items,
       double min) {
 
-    List<Indexed<Integer, Double>> ret = new ArrayList<Indexed<Integer, Double>>(
+    List<Indexed<Integer, Double>> ret = new ArrayList<>(
         items.size());
 
     for (Indexed<Integer, Double> index : items) {

@@ -35,7 +35,7 @@ import org.jebtk.math.matrix.Matrix;
 /**
  * The class SingleLinkage.
  */
-public class SingleLinkage implements Linkage {
+public class SingleLinkage implements ILinkage {
 
   /*
    * (non-Javadoc)

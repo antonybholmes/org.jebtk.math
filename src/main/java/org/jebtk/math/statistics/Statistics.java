@@ -100,7 +100,7 @@ public class Statistics {
   public static final List<Double> zscore(List<Double> values,
       double m,
       double sd) {
-    List<Double> zscores = new ArrayList<Double>(values.size());
+    List<Double> zscores = new ArrayList<>(values.size());
 
     for (double v : values) {
       zscores.add(zscore(v, m, sd));
@@ -451,7 +451,7 @@ public class Statistics {
    *
    * @param values the values
    * @param startIndex the start index
-   * @param endIndex the end index
+   * @param l
    * @return the double
    */
   public static final double mean(double[] values, int startIndex, int l) {
@@ -490,7 +490,7 @@ public class Statistics {
     int max = -1;
     int count;
 
-    Map<Double, Integer> occurences = new HashMap<Double, Integer>();
+    Map<Double, Integer> occurences = new HashMap<>();
 
     for (double v : values) {
       if (!occurences.containsKey(v)) {
@@ -506,7 +506,7 @@ public class Statistics {
       }
     }
 
-    List<Double> modes = new ArrayList<Double>();
+    List<Double> modes = new ArrayList<>();
 
     for (Entry<Double, Integer> entry : occurences.entrySet()) {
       if (entry.getValue() == max) {
@@ -757,7 +757,7 @@ public class Statistics {
    * @return the double
    */
   public static double mad(List<Double> values) {
-    List<Double> a = new ArrayList<Double>(values.size());
+    List<Double> a = new ArrayList<>(values.size());
 
     double m = median(values);
 
@@ -853,7 +853,7 @@ public class Statistics {
   public static List<Double> bonferroniCorrection(List<Double> pvalues) {
     int n = pvalues.size();
 
-    List<Double> ret = new ArrayList<Double>(n);
+    List<Double> ret = new ArrayList<>(n);
 
     for (double value : pvalues) {
       ret.add(value * n);
@@ -1205,7 +1205,7 @@ public class Statistics {
       double max) {
     List<Indexed<Integer, Double>> indexed = IndexedInt.index(values);
 
-    List<Indexed<Integer, Double>> ret = new ArrayList<Indexed<Integer, Double>>(
+    List<Indexed<Integer, Double>> ret = new ArrayList<>(
         values.size());
 
     for (Indexed<Integer, Double> item : indexed) {
@@ -1233,7 +1233,7 @@ public class Statistics {
       double max) {
     List<Indexed<Integer, Double>> indexed = IndexedInt.index(values);
 
-    List<Indexed<Integer, Double>> ret = new ArrayList<Indexed<Integer, Double>>(
+    List<Indexed<Integer, Double>> ret = new ArrayList<>(
         values.length);
 
     for (Indexed<Integer, Double> item : indexed) {
@@ -1260,7 +1260,7 @@ public class Statistics {
       double max) {
     List<Indexed<Integer, Double>> indexed = IndexedInt.index(values);
 
-    List<Indexed<Integer, Double>> ret = new ArrayList<Indexed<Integer, Double>>();
+    List<Indexed<Integer, Double>> ret = new ArrayList<>();
 
     for (Indexed<Integer, Double> item : indexed) {
       if (item.getValue() <= min || item.getValue() >= max) {
@@ -1278,11 +1278,11 @@ public class Statistics {
    * @return A list ranked values, or null if the values list is null or empty.
    */
   public static List<Double> tiedRank(List<Double> values) {
-    if (values == null || values.size() == 0) {
+    if (values == null || values.isEmpty()) {
       return null;
     }
 
-    CountMap<Double> countMap = new CountMap<Double>();
+    CountMap<Double> countMap = new CountMap<>();
 
     // Count the values
     countMap.inc(values);
@@ -1298,7 +1298,7 @@ public class Statistics {
 
     double v;
 
-    Map<Integer, Double> ranks = new HashMap<Integer, Double>();
+    Map<Integer, Double> ranks = new HashMap<>();
 
     // ranks.put(sorted.get(0).getIndex(), rank /
     // countMap.get(sorted.get(0).getValue()));
@@ -1332,7 +1332,7 @@ public class Statistics {
       ranks.put(sorted.get(i).getIndex(), rank);
     }
 
-    List<Double> ret = new ArrayList<Double>(values.size());
+    List<Double> ret = new ArrayList<>(values.size());
 
     for (int i = 0; i < values.size(); ++i) {
       ret.add(ranks.get(i));
@@ -1425,7 +1425,7 @@ public class Statistics {
       bins[b] += 1;
     }
 
-    List<HistBin> histBins = new ArrayList<HistBin>(n);
+    List<HistBin> histBins = new ArrayList<>(n);
 
     for (int c : bins) {
       histBins.add(new HistBin(start, binWidth, c));
@@ -1516,7 +1516,7 @@ public class Statistics {
       map.put(bin, map.get(bin) + 1);
     }
 
-    List<Integer> ret = new ArrayList<Integer>(map.size());
+    List<Integer> ret = new ArrayList<>(map.size());
 
     for (int bin : map.keySet()) {
       ret.add(map.get(bin));

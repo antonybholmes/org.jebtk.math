@@ -59,7 +59,7 @@ public class Sequence {
    * @return the list
    */
   public static List<Integer> generate(int start, int end, int gap) {
-    List<Integer> values = new ArrayList<Integer>(
+    List<Integer> values = new ArrayList<>(
         Math.abs(end - start) / gap + 1);
 
     int s = start;

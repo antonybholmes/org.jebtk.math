@@ -31,13 +31,15 @@ import org.jebtk.core.collections.CollectionUtils;
  */
 public class TwoSampleTest {
 
-  private double[] mS1;
-  private double[] mS2;
+  private final double[] mS1;
+  private final double[] mS2;
 
   MannWhitneyUTest mMw = null;
 
   /**
    * Instantiates a new test.
+   * @param s1
+   * @param s2
    */
   public TwoSampleTest(double[] s1, double[] s2) {
     mS1 = new double[s1.length];

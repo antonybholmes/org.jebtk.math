@@ -35,7 +35,7 @@ import org.jebtk.math.matrix.Matrix;
 /**
  * The class AverageLinkage.
  */
-public class AverageLinkage implements Linkage {
+public class AverageLinkage implements ILinkage {
 
   /*
    * (non-Javadoc)
@@ -64,7 +64,7 @@ public class AverageLinkage implements Linkage {
 
       int id1 = c1.getId();
 
-      Deque<Cluster> stack = new ArrayDeque<Cluster>();
+      Deque<Cluster> stack = new ArrayDeque<>();
 
       stack.push(c2);
 
@@ -82,7 +82,7 @@ public class AverageLinkage implements Linkage {
     } else if (c1.isParent() && !c2.isParent()) {
       int id2 = c2.getId();
 
-      Deque<Cluster> stack = new ArrayDeque<Cluster>();
+      Deque<Cluster> stack = new ArrayDeque<>();
 
       stack.push(c1);
 
@@ -100,7 +100,7 @@ public class AverageLinkage implements Linkage {
     } else {
       // Distance between all possible nodes
 
-      Deque<Cluster> stack1 = new ArrayDeque<Cluster>();
+      Deque<Cluster> stack1 = new ArrayDeque<>();
       stack1.push(c1);
 
       while (!stack1.isEmpty()) {
@@ -110,7 +110,7 @@ public class AverageLinkage implements Linkage {
           stack1.push(cp1.getChild2());
           stack1.push(cp1.getChild1());
         } else {
-          Deque<Cluster> stack2 = new ArrayDeque<Cluster>();
+          Deque<Cluster> stack2 = new ArrayDeque<>();
           stack2.push(c2);
 
           while (!stack2.isEmpty()) {

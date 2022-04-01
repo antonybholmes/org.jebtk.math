@@ -32,7 +32,7 @@ import org.jebtk.math.matrix.Matrix;
 /**
  * The interface Linkage.
  */
-public interface Linkage {
+public interface ILinkage {
 
   /**
    * Given a distance matrix of clusters.

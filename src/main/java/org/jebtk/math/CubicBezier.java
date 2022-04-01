@@ -34,10 +34,10 @@ public class CubicBezier {
   private static final DoublePos2D P3 = new DoublePos2D(1, 1);
 
   /** The m X. */
-  private double[] mX = new double[4];
+  private final double[] mX = new double[4];
 
   /** The m Y. */
-  private double[] mY = new double[4];
+  private final double[] mY = new double[4];
 
   /**
    * Instantiates a new cubic bezier.
